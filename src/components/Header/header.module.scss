@@ -1,0 +1,172 @@
+.Header {
+  height: 30vh;
+  min-width: 100%;
+
+  background-image: url(../../styles/images/pattern-bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding: 2rem; 
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  position: relative;
+  
+  h1 {
+    color: white;
+    font-size: 2rem;
+  }
+}
+
+.Inputs {
+  width: 100%;
+
+  
+  animation: fadeIn 1s ease forwards;
+  form {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input {
+    width: 30%;
+    height: 3.5rem;
+    margin-top: 2.5rem;
+    border: 0;
+    border-radius: .75rem 0 0 .75rem;
+
+    padding-left: 1.5rem;
+
+    &::placeholder {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--Dark-grey);
+    }
+  }
+
+  button {
+    height: 3.5rem;
+    width: 3.5rem;
+    align-self: flex-end;
+    border-radius: 0 .75rem .75rem 0;
+    border: none;
+    background-color: black;
+    background-image: url(../../styles/images/icon-arrow.svg);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+
+    &:hover {
+      background-color: rgb(63, 63, 63);
+    }
+  }
+}
+
+.Table {
+  position: absolute;
+
+
+  width: 80%;
+  height: 53%;
+  background-color: white;
+  bottom: -22.5%; 
+  border-radius: .75rem;
+
+  padding-bottom: .5rem; 
+
+  display: flex;
+  align-items: center;
+  z-index: 100;
+
+  animation: fadeIn 1s ease forwards; 
+
+  .Info {
+    width: 25%;
+    height: 100%;
+
+    position: relative;
+
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    p {
+      font-size: .9rem;
+      font-weight: 500;
+      padding-bottom: 1rem;
+
+      letter-spacing: 1px;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .Bar {
+    width: 2px; 
+    height: 45%; 
+
+    background: rgba(131, 131, 131, 0.205);
+  }
+}
+
+@keyframes fadeIn {
+  0%{ 
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }  
+}
+
+@media (max-width: 1500px) {
+  .Table {
+    height: 55%;
+  }
+} 
+
+@media (max-width: 1200px) {
+  .Inputs{
+    input {
+      width: 40%;
+    }
+  }
+}
+
+@media (max-width: 1050px) {
+  .Table{
+    height: 50%; 
+  }
+}
+
+@media (max-width: 900px) {
+  .Table {
+    flex-direction: column;
+    height: fit-content;
+    bottom: -65%; 
+
+    .Info {
+      padding: .5rem;
+      width: 100%;
+      align-items: center;
+    }
+  }
+
+  .Inputs{
+    input {
+      width: 75%;
+    }
+  }
+}

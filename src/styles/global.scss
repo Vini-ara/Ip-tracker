@@ -1,0 +1,45 @@
+* {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+
+:root {
+  --Very-dark-grey: hsl(0, 0%, 17%);
+  --Dark-grey: hsl(0, 0%, 59%);
+}
+
+@media (max-width: 1500px) {
+  html {
+    font-size: 87%;
+  }
+}
+
+@media (max-width: 1050px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  background-color: azure;
+}
+
+h1,h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+span, p, input, button {
+  font: 400 18px 'Rubik', sans-serif; 
+  color: var(--Dark-grey)
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+input {
+  outline: none;
+}
