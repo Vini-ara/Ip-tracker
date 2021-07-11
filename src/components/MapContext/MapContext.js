@@ -1,4 +1,4 @@
-import React,{ createContext, useState } from "react";
+import React,{ createContext, useEffect, useState } from "react";
 import axios from 'axios';
 
 import { store } from "react-notifications-component";
@@ -8,7 +8,6 @@ export const MapContext = createContext();
 function MapContextProvider(props) {
   const [ipAddress, setIpAddress] = useState(null);
   const [loading, setLoading] = useState(true);
-  //const [historic, setHistoric] = useState([]);
   const [result, setResult] = useState({
     location: '',
     timezone: '',
@@ -16,60 +15,46 @@ function MapContextProvider(props) {
     lat: '',
     lng: ''
   });
-  const apiKey = process.env.REACT_APP_API_KEY;
   
-  async function firstLoad() {
-    const apiUrl = `https://geo.ipify.org/api/v1?apiKey=${apiKey}`;
+  
 
-    //const storage = localStorage.getItem('@ip-tracker/searchHistory');
+  useEffect(()=>{
+    async function firstLoad() {
+      const apiKey = process.env.REACT_APP_API_KEY;
 
-    //if(!storage) {
-      //localStorage.setItem('@ip-tracker/searchHistory', [])
-    //} else{
-     // setHistoric(historic.push(storage));
-    //}
-
-    await axios.get(apiUrl)
-      .then(res => {
-
-        if(res.status !== 200) throw new Error();
-
-        console.log(res)
-
-        const data = res.data
-
-        setResult({
-          location: `${data.location.region},${data.location.city}`,
-          timezone: `${data.location.timezone}`,
-          isp: `${data.isp}`,
-          lat: `${data.location.lat}`,
-          lng: `${data.location.lng}`
+      const apiUrl = `https://geo.ipify.org/api/v1?apiKey=${apiKey}`;
+  
+      setLoading(true)
+  
+      await axios.get(apiUrl)
+        .then(res => {
+  
+          if(res.status !== 200) throw new Error();
+  
+          const data = res.data
+  
+          setResult({
+            location: `${data.location.region},${data.location.city}`,
+            timezone: `${data.location.timezone}`,
+            isp: `${data.isp}`,
+            lat: `${data.location.lat}`,
+            lng: `${data.location.lng}`
+          })
+  
+          setIpAddress(data.ip)
         })
+  
+      setTimeout(()=>{
+        setLoading(false);
+      }, 4000)
+    };
+    firstLoad()
+  },[])
+  
 
-        setIpAddress(data.ip)
-      })
-
-    setTimeout(()=>{
-      setLoading(false);
-
-      store.addNotification({
-        title: "Warning",
-        message: "Addblocks may enter in conflict with the app",
-        type: "warning",
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animate-animated", "animate-fadeIn"],
-        animationOut: ["animate-animated", "animate-fadeOut"],
-        dismiss: {
-          duration: 4000,
-          onScreen: true
-        }
-      })
-    }, 4000)
-
-  }
-
-  async function handleSubmit(ip) { 
+  async function handleSubmit(ip) {
+    const apiKey = process.env.REACT_APP_API_KEY;
+    
     let apiUrl = ''
 
     const lastChar = ip.charAt(ip.length - 1)
@@ -115,9 +100,6 @@ function MapContextProvider(props) {
        }
      })
     }
-    
-    //setHistoric(historic.push(ip))
-    //localStorage.setItem('@ip-tracker/searchHistory', historic)
   }
   
   return(
@@ -125,7 +107,6 @@ function MapContextProvider(props) {
       ipAddress,
       result,
       loading, 
-      firstLoad,
       handleSubmit}}>
       {props.children}
     </MapContext.Provider>

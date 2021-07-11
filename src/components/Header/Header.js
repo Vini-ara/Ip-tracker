@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, } from 'react';
 import { MapContext } from '../MapContext/MapContext';
 
 import styles from './header.module.scss';
@@ -9,9 +9,7 @@ export default function Header() {
 
   const [input, setInput] = useState(null)
 
-  const {isp, location, timezone} = data.result; 
-
-  useEffect(() => { data.firstLoad() },[])
+  const {isp, location, timezone} = data.result;
 
   function ipSubmit(event) {
     event.preventDefault();
