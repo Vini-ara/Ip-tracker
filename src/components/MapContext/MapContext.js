@@ -20,7 +20,7 @@ function MapContextProvider(props) {
 
   useEffect(()=>{
     async function firstLoad() {
-      const apiKey = process.env.REACT_APP_API_KEY;
+      const apiKey = 'at_7HUKdQSWEQp1Z3A7SgwWONBDey3j3'
 
       const apiUrl = `https://geo.ipify.org/api/v1?apiKey=${apiKey}`;
   
@@ -53,7 +53,7 @@ function MapContextProvider(props) {
   
 
   async function handleSubmit(ip) {
-    const apiKey = process.env.REACT_APP_API_KEY;
+    const apiKey = 'at_7HUKdQSWEQp1Z3A7SgwWONBDey3j3'
     
     let apiUrl = ''
 
