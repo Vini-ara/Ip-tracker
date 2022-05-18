@@ -15,12 +15,12 @@ function MapContextProvider(props) {
     lat: '',
     lng: ''
   });
-  
-  
 
   useEffect(()=>{
     async function firstLoad() {
-      const apiKey = 'at_7HUKdQSWEQp1Z3A7SgwWONBDey3j3'
+      const apiKey = process.env.REACT_APP_API_KEY
+
+      console.log(apiKey)
 
       const apiUrl = `https://geo.ipify.org/api/v1?apiKey=${apiKey}`;
   
@@ -28,11 +28,8 @@ function MapContextProvider(props) {
   
       await axios.get(apiUrl)
         .then(res => {
-  
-          if(res.status !== 200) throw new Error();
-  
           const data = res.data
-  
+
           setResult({
             location: `${data.location.region},${data.location.city}`,
             timezone: `${data.location.timezone}`,
@@ -40,9 +37,9 @@ function MapContextProvider(props) {
             lat: `${data.location.lat}`,
             lng: `${data.location.lng}`
           })
-  
+
           setIpAddress(data.ip)
-        })
+       })
   
       setTimeout(()=>{
         setLoading(false);
@@ -50,7 +47,6 @@ function MapContextProvider(props) {
     };
     firstLoad()
   },[])
-  
 
   async function handleSubmit(ip) {
     const apiKey = 'at_7HUKdQSWEQp1Z3A7SgwWONBDey3j3'

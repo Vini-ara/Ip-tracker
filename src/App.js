@@ -11,7 +11,6 @@ import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 
 function App() {
-
   return (
     <MapContextProvider>
       <div className={styles.App}>
