@@ -20,8 +20,6 @@ function MapContextProvider(props) {
     async function firstLoad() {
       const apiKey = process.env.REACT_APP_API_KEY
 
-      console.log(apiKey)
-
       const apiUrl = `https://geo.ipify.org/api/v1?apiKey=${apiKey}`;
   
       setLoading(true)
